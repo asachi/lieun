@@ -163,14 +163,15 @@ body, html {
   }
 }
 
-/* ここから追加 - ECリンクボタンのスタイル */
+/* ECリンクボタンのスタイル - 位置修正版 */
 .ec-link-button {
   position: absolute;
-  top: 15%;
-  right: 5%;
-  background-color: rgba(255, 255, 255, 0.9);
+  top: 20%; /* 中央やや上部へ調整 */
+  left: 56%; /* 中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  background-color: rgba(255, 255, 255, 1.0);
   color: #333;
-  padding: 10px 15px;
+  padding: 20px 15px;
   border-radius: 12px;
   font-family: sans-serif;
   font-size: 14px;
@@ -185,30 +186,11 @@ body, html {
   display: block;
 }
 
-.ec-link-button:hover, .ec-link-button:active {
-  background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
-}
-
-.ec-link-button .product-name {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 3px;
-}
-
-.ec-link-button .product-price {
-  display: block;
-  font-size: 13px;
-}
-
 /* モバイル対応 */
 @media (max-width: 768px) {
   .ec-link-button {
     padding: 8px 12px;
     font-size: 12px;
-    top: 10%;
-    right: 5%;
+    top: 20%; /* モバイルではやや上に */
   }
 }
-/* 追加終わり */
