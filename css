@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f5f5f5;
+}
+
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #333;
+}
+
+.controls-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+  max-width: 300px;
+  pointer-events: auto;
+}
+
+.color-swatches button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-swatches button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatches button.selected {
+  border: 3px solid #333;
+  transform: scale(1.1);
+}
+
+.view-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  pointer-events: auto;
+}
+
+.view-controls button {
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  color: #333;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.view-controls button:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.view-controls button:active {
+  background: #e0e0e0;
+  transform: scale(0.95);
+}
+
+.can-rotate {
+  cursor: grab !important;
+}
+
+.rotating {
+  cursor: grabbing !important;
+}
+
+/* モバイルデバイス用レスポンシブスタイル */
+@media (max-width: 767px) {
+  .color-swatches button {
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+  }
+
+  .view-controls button {
+    width: 40px;
+    height: 40px;
+    margin: 0 6px;
+  }
+  
+  .controls-container {
+    bottom: 20px;
+  }
+}
+
+/* ここから追加 - ECリンクボタンのスタイル */
+.ec-link-button {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+}
+
+.ec-link-button:hover, .ec-link-button:active {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.ec-link-button .product-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.ec-link-button .product-price {
+  display: block;
+  font-size: 13px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .ec-link-button {
+    padding: 8px 12px;
+    font-size: 12px;
+    top: 10%;
+    right: 5%;
+  }
+}
+/* 追加終わり */
