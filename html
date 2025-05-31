@@ -1,0 +1,48 @@
+<div id="canvas"></div>
+
+<div class="loading-screen">
+  <div class="spinner"></div>
+  <div class="loading-text">ロード中...</div>
+</div>
+
+<div class="controls-container">
+  <div id="swatches" class="color-swatches">
+    <!-- カラースウォッチはJSで生成されます -->
+  </div>
+  
+  <div class="view-controls">
+    <button id="reset-view" title="ビューをリセット">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M12 5V2.21c0-.45-.54-.67-.85-.35l-3.8 3.79c-.2.2-.2.51 0 .71l3.79 3.79c.32.31.86.09.86-.36V7c3.73 0 6.68 3.42 5.86 7.29-.47 2.27-2.31 4.1-4.57 4.57-3.57.75-6.75-1.7-7.23-5.01-.07-.48-.49-.85-.98-.85-.6 0-1.08.53-1 1.13.62 4.39 4.8 7.64 9.53 6.72 3.12-.61 5.63-3.12 6.24-6.24C20.84 9.48 16.94 5 12 5z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Three.js ライブラリ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- fflateライブラリ - 必須！ -->
+<script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
+<script>
+  // ここが重要: fflateをグローバルに露出させる
+  window.Zlib = window.Zlib || {};
+  window.Zlib.Inflate = fflate.Inflate;
+  window.Inflate = fflate.Inflate;
+  
+  // デバッグ出力
+  console.log("fflate loaded:", typeof fflate);
+  console.log("Zlib.Inflate:", typeof window.Zlib?.Inflate);
+</script>
+
+<!-- Three.jsの拡張機能 -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<!-- ポストプロセッシング関連 -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<!-- アニメーション用GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
