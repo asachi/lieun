@@ -77,6 +77,63 @@ window.addEventListener('error', function(event) {
   }
 });
 
+// ECへのリンクボタンを作成する関数
+function createECLinkButton() {
+  try {
+    log(3, 'ECリンクボタン作成開始');
+    
+    // 既存のボタンを削除（再作成時用）
+    const existingButton = document.querySelector('.ec-link-button');
+    if (existingButton) {
+      existingButton.remove();
+    }
+    
+    // リンクボタン要素を作成
+    const ecLinkButton = document.createElement('a');
+    ecLinkButton.className = 'ec-link-button';
+    ecLinkButton.href = 'https://lieun.official.ec/items/100520662';
+    ecLinkButton.target = '_blank'; // 新しいタブで開く
+    ecLinkButton.rel = 'noopener noreferrer'; // セキュリティ対策
+    
+    // 内部テキスト構造を作成
+    const productName = document.createElement('span');
+    productName.className = 'product-name';
+    productName.textContent = 'Detachable Signet Ring';
+    
+    const productPrice = document.createElement('span');
+    productPrice.className = 'product-price';
+    productPrice.textContent = '¥20,000';
+    
+    // 要素を組み立て
+    ecLinkButton.appendChild(productName);
+    ecLinkButton.appendChild(productPrice);
+    
+    // ページに追加
+    document.body.appendChild(ecLinkButton);
+    
+    log(3, 'ECリンクボタン作成完了');
+    
+    // ボタンの位置をリングの位置に合わせる調整関数
+    function adjustButtonPosition() {
+      if (ringMesh) {
+        // リングの3D位置に合わせて調整することも可能
+        // ここではCSSの固定位置を使用
+      }
+    }
+    
+    // 初期調整
+    adjustButtonPosition();
+    
+    // イベントリスナー - タッチでも動作するように
+    ecLinkButton.addEventListener('touchstart', function(e) {
+      // タッチイベントの標準的な処理を維持
+    }, { passive: true });
+    
+  } catch (error) {
+    log(1, 'ECリンクボタン作成エラー', error);
+  }
+}
+
 // script.js - パート2: 初期化とレンダラー設定
 function init() {
   log(3, 'init() 開始');
@@ -195,6 +252,9 @@ function init() {
     
     // イベントリスナーの設定
     setupEventListeners();
+    
+    // ECリンクボタンを作成
+    createECLinkButton();
     
   } catch (error) {
     log(1, 'init()でエラー発生', error);
@@ -1127,9 +1187,8 @@ function onResize() {
     camera.updateProjectionMatrix();
     
     // リサイズ時にカメラ位置も更新
-camera.position.y = CAMERA_HEIGHT * 2.5;
-camera.position.z = 0; // Z位置も更新
-camera.lookAt(0, RING_HEIGHT, 0);
+    camera.position.y = CAMERA_HEIGHT;
+    camera.lookAt(0, RING_HEIGHT, 0);
     
     // リングの位置も更新（もし存在すれば）
     if (ringMesh) {
@@ -1140,10 +1199,15 @@ camera.lookAt(0, RING_HEIGHT, 0);
       renderer.setSize(window.innerWidth, window.innerHeight);
       composer.setSize(window.innerWidth, window.innerHeight);
     }
+    
+    // ECリンクボタンも再調整（必要に応じて）
+    createECLinkButton();
+    
   } catch (error) {
     log(1, 'リサイズ処理エラー', error);
   }
 }
+
 
 // script.js - パート8: アニメーションループと初期化
 function animate() {
